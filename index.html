@@ -149,6 +149,7 @@
   .link-card:nth-child(4){animation:fadeUp .7s 1.12s ease-out forwards}
   .link-card:nth-child(5){animation:fadeUp .7s 1.22s ease-out forwards}
   .link-card:nth-child(6){animation:fadeUp .7s 1.32s ease-out forwards}
+  .link-card:nth-child(7){animation:fadeUp .7s 1.42s ease-out forwards}
 
   .link-card::before{
     content:'';position:absolute;inset:0;
@@ -463,6 +464,99 @@
   .theme-toggle .icon-sun{display:none}
   [data-theme="light"] .theme-toggle .icon-sun{display:block}
   [data-theme="light"] .theme-toggle .icon-moon{display:none}
+
+  /* ==================== EQUIPMENT OVERLAY ==================== */
+  .equip-popup{
+    background:linear-gradient(160deg,#13080a,#1a0f12);
+    border:1px solid var(--border);
+    border-radius:20px;padding:32px 24px;
+    max-width:480px;width:100%;
+    transform:scale(.92) translateY(20px);
+    transition:all .45s cubic-bezier(.22,1,.36,1);
+    position:relative;
+    max-height:90vh;overflow-y:auto;
+    scrollbar-width:thin;
+    scrollbar-color:var(--accent2) transparent;
+  }
+  [data-theme="light"] .equip-popup{background:linear-gradient(160deg,#fff,#f8f2f0)}
+  .overlay.active .equip-popup{transform:scale(1) translateY(0)}
+
+  .equip-popup::-webkit-scrollbar{width:4px}
+  .equip-popup::-webkit-scrollbar-track{background:transparent}
+  .equip-popup::-webkit-scrollbar-thumb{background:var(--accent2);border-radius:4px}
+
+  .equip-header{text-align:center;margin-bottom:28px}
+  .equip-header h3{
+    font-family:var(--serif);font-weight:300;font-size:26px;
+    letter-spacing:3px;text-transform:uppercase;
+    background:linear-gradient(135deg,var(--fg),var(--accent));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    background-clip:text;
+  }
+  .equip-header p{
+    font-size:12px;color:var(--muted);font-weight:200;
+    letter-spacing:2px;text-transform:uppercase;margin-top:6px;
+  }
+  .equip-divider{
+    width:40px;height:1px;margin:16px auto 0;
+    background:linear-gradient(90deg,transparent,var(--accent),transparent);
+  }
+
+  .equip-category{margin-bottom:24px}
+  .equip-category:last-child{margin-bottom:0}
+  .equip-cat-title{
+    font-family:var(--serif);font-size:14px;font-weight:400;
+    letter-spacing:2px;text-transform:uppercase;
+    color:var(--accent);margin-bottom:14px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .equip-cat-title::after{
+    content:'';flex:1;height:1px;
+    background:linear-gradient(90deg,rgba(184,46,60,.2),transparent);
+  }
+
+  .equip-item{
+    display:flex;align-items:center;gap:16px;
+    padding:14px 18px;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:12px;
+    margin-bottom:10px;
+    transition:all .35s cubic-bezier(.22,1,.36,1);
+  }
+  .equip-item:last-child{margin-bottom:0}
+  .equip-item:hover{
+    background:var(--card-hover);
+    border-color:rgba(184,46,60,.25);
+    transform:translateX(4px);
+  }
+
+  .equip-icon{
+    width:38px;height:38px;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:10px;
+    background:rgba(184,46,60,.1);
+  }
+  .equip-icon svg{width:18px;height:18px;fill:var(--accent)}
+  .equip-icon.soft{background:rgba(184,46,60,.06)}
+
+  .equip-info{flex:1}
+  .equip-name{
+    font-family:var(--sans);font-weight:400;font-size:14px;
+    letter-spacing:.4px;color:var(--fg);
+  }
+  .equip-detail{
+    font-size:11.5px;color:var(--muted);font-weight:200;
+    letter-spacing:.3px;margin-top:2px;
+  }
+
+  .equip-badge{
+    font-size:10px;font-weight:300;letter-spacing:1px;text-transform:uppercase;
+    padding:4px 10px;border-radius:6px;
+    background:rgba(184,46,60,.08);
+    color:var(--accent);border:1px solid rgba(184,46,60,.12);
+    flex-shrink:0;
+  }
 </style>
 </head>
 <body>
@@ -553,6 +647,17 @@
       <div class="link-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
     </a>
 
+    <div class="link-card" onclick="openEquip()" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openEquip()">
+      <div class="link-icon">
+        <svg viewBox="0 0 24 24"><path d="M20 5h-3.17L15 3H9L7.17 5H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm-8 13c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.65 0-3 1.35-3 3s1.35 3 3 3 3-1.35 3-3-1.35-3-3-3z"/></svg>
+      </div>
+      <div class="link-info">
+        <div class="link-title">Mon Équipement</div>
+        <div class="link-sub">Setup photo & logiciels</div>
+      </div>
+      <div class="link-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
+    </div>
+
     <div class="link-card" onclick="openMail()" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openMail()">
       <div class="link-icon">
         <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
@@ -626,6 +731,95 @@
 </div>
 
 <!-- Lightbox -->
+
+<!-- Equipment Overlay -->
+<div class="overlay" id="equipOverlay" onclick="closeEquip(event)">
+  <div class="equip-popup">
+    <button class="popup-close" onclick="closeEquip()" aria-label="Fermer">
+      <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+
+    <div class="equip-header">
+      <h3>Équipement</h3>
+      <p>Mon setup photo</p>
+      <div class="equip-divider"></div>
+    </div>
+
+    <div class="equip-category">
+      <div class="equip-cat-title">Boîtier</div>
+      <div class="equip-item">
+        <div class="equip-icon">
+          <svg viewBox="0 0 24 24"><path d="M20 5h-3.17L15 3H9L7.17 5H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm-8 13c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg>
+        </div>
+        <div class="equip-info">
+          <div class="equip-name">Sony a6400</div>
+          <div class="equip-detail">APS-C · 24.2 MP · 4K</div>
+        </div>
+        <span class="equip-badge">Principal</span>
+      </div>
+    </div>
+
+    <div class="equip-category">
+      <div class="equip-cat-title">Objectifs</div>
+      <div class="equip-item">
+        <div class="equip-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg>
+        </div>
+        <div class="equip-info">
+          <div class="equip-name">Tamron 70-300mm</div>
+          <div class="equip-detail">f/4.5-6.3 · Di III RXD</div>
+        </div>
+        <span class="equip-badge">Téléphoto</span>
+      </div>
+      <div class="equip-item">
+        <div class="equip-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg>
+        </div>
+        <div class="equip-info">
+          <div class="equip-name">Sony E PZ 16-50mm</div>
+          <div class="equip-detail">f/3.5-5.6 OSS · Kit lens</div>
+        </div>
+        <span class="equip-badge">Polyvalent</span>
+      </div>
+    </div>
+
+    <div class="equip-category">
+      <div class="equip-cat-title">Accessoires</div>
+      <div class="equip-item">
+        <div class="equip-icon soft">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+        </div>
+        <div class="equip-info">
+          <div class="equip-name">Trépied</div>
+          <div class="equip-detail">Le fidèle héritage familial</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="equip-category">
+      <div class="equip-cat-title">Logiciels</div>
+      <div class="equip-item">
+        <div class="equip-icon soft">
+          <svg viewBox="0 0 24 24"><path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14zM5 15h14v3H5z"/></svg>
+        </div>
+        <div class="equip-info">
+          <div class="equip-name">Adobe Lightroom</div>
+          <div class="equip-detail">Retouche & développement RAW</div>
+        </div>
+      </div>
+      <div class="equip-item">
+        <div class="equip-icon soft">
+          <svg viewBox="0 0 24 24"><path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14zM5 15h14v3H5z"/></svg>
+        </div>
+        <div class="equip-info">
+          <div class="equip-name">Adobe Photoshop</div>
+          <div class="equip-detail">Compositing & retouche avancée</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
   <button class="lightbox-close" onclick="closeLightbox()" aria-label="Fermer">
     <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
@@ -692,6 +886,17 @@
     document.body.style.overflow = '';
   }
 
+  // Equipment
+  function openEquip(){
+    document.getElementById('equipOverlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeEquip(e){
+    if(e && e.target !== e.currentTarget) return;
+    document.getElementById('equipOverlay').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
   // Lightbox
   var currentIdx = 0;
   var portfolioImgs = document.querySelectorAll('.portfolio-item img');
@@ -714,13 +919,12 @@
   document.addEventListener('keydown', function(e){
     if(e.key === 'Escape'){
       closeLightbox();
-      closeMail();
       closePortfolio();
+      closeMail();
+      closeEquip();
     }
-    if(document.getElementById('lightbox').classList.contains('active')){
-      if(e.key === 'ArrowLeft') navLightbox(-1);
-      if(e.key === 'ArrowRight') navLightbox(1);
-    }
+    if(e.key === 'ArrowLeft') navLightbox(-1);
+    if(e.key === 'ArrowRight') navLightbox(1);
   });
 </script>
 </body>
