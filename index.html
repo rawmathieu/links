@@ -943,16 +943,6 @@ body::after {
     });
   }
 
-  // Portfolio
-  function openPortfolio() {
-    document.getElementById('portfolioOverlay').classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
-  function closePortfolio(e) {
-    if (e && e.target !== e.currentTarget) return;
-    document.getElementById('portfolioOverlay').classList.remove('active');
-    document.body.style.overflow = '';
-  }
 
   // Equipment
   function openEquip() {
